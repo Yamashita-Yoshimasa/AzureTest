@@ -17,8 +17,7 @@
   "scripts": {
     "start": "ts-node-dev -r esm --no-notify --respawn src/index.ts",
     "build": "node build.js",
-    "bck": "node --es-module-specifier-resolution=node ./build/index.js",
-    "postinstall": "typesync"
+    "bck": "node --es-module-specifier-resolution=node ./build/index.js"
   },
   "browserslist": {
     "production": [
