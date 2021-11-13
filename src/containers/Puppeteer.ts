@@ -5,9 +5,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable consistent-return */
-import puppeteer from 'puppeteer';
+import chromium from 'chrome-aws-lambda';
 import dotenv from 'dotenv';
 
+const puppeteer = chromium.puppeteer;
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 export const OpenPage = async () => {
   let pckoubouNames: unknown = [];
