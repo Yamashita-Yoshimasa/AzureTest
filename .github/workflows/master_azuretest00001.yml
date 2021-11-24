@@ -10,28 +10,32 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  setup:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [latest]
+        node: [latest]
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Node.js version
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2-beta
         with:
-          node-version: '14.x'
+          node-version: ${{ matrix.node }}
 
-      - name: npm install, build, and test
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: Install & build
+        if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
         run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: node-app
-          path: .
+          yarn --check-files --frozen-lockfile --non-interactive
+          yarn build
 
   deploy:
     runs-on: ubuntu-latest
