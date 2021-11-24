@@ -36,7 +36,6 @@ jobs:
         run: |
           yarn --check-files --frozen-lockfile --non-interactive
           yarn build
-
   deploy:
     runs-on: ubuntu-latest
     needs: build
