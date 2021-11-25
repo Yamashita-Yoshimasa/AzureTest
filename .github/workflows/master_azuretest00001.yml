@@ -17,14 +17,14 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14.x]
+        node: [latest]
 
     steps:
       - uses: actions/checkout@v2
       - name: Set up Node.js version
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2-beta
         with:
-          node-version: '14.x'
+          node-version: ${{ matrix.node }}
       
       - name: Cache node_modules
         id: node_modules_cache_id
