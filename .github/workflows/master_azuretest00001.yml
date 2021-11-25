@@ -46,6 +46,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'AzureTest00001'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_407391B50ADD402B80353B6285DB29B7 }}
-          package: .
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
