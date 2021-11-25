@@ -16,31 +16,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
           node-version: '14.x'
-
       - name: Cache node_modules
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
           path: node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
       - name: Install
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
         run: |
           yarn --check-files --frozen-lockfile --non-interactive
-      
       - name: build
         run: yarn build
-
-      - name: 'Deploy to Azure Web App'
-              id: deploy-to-webapp
-              uses: azure/webapps-deploy@v2
-              with:
-                app-name: 'AzureTest00001'
-                publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_407391B50ADD402B80353B6285DB29B7 }}
-                package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      # - name: 'Deploy to Azure Web App'
+      #         id: deploy-to-webapp
+      #         uses: azure/webapps-deploy@v2
+      #         with:
+      #           app-name: 'AzureTest00001'
+      #           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_407391B50ADD402B80353B6285DB29B7 }}
+      #           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
