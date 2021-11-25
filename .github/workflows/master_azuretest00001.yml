@@ -41,15 +41,6 @@ jobs:
       
       - name: build
         run: yarn build
-      
-      - name: Login via Az module
-        uses: azure/login@v1
-        with:
-          creds: ${{secrets.AZURE_CREDENTIALS}}
-          enable-AzPSSession: true 
-      
-      - run: |
-          Get-AzVM -ResourceGroupName "ResourceGroup11"
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
