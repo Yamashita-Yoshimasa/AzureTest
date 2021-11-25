@@ -41,6 +41,10 @@ jobs:
       
       - name: build
         run: yarn build
+      
+      - uses: azure/login@v1
+        with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
