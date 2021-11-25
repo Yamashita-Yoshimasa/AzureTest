@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-node@v2-beta
         with:
           node-version: ${{ matrix.node }}
-          
+
       - name: Checkout
         uses: actions/checkout@v2
       
@@ -37,7 +37,7 @@ jobs:
       - name: Install
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
         run: |
-          yarn --check-files --frozen-lockfile --non-interactive
+          yarn --check-files --frozen-lockfile
       
       - name: build
         run: yarn build
