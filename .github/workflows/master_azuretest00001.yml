@@ -36,7 +36,7 @@ jobs:
       - name: build
         run: yarn build
 
-      environment:
+      - environment:
             name: 'Production'
             url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
