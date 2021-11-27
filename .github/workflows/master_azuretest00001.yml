@@ -41,7 +41,6 @@ jobs:
       
       - name: build
         run: |
-          yarn install 
           yarn build
 
       - name: 'Deploy to Azure Web App'
